@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Cloud</string>
+
+    <!--TITLE-->
+    <string name="collect">我的收藏</string>
+
+    <!--TAB-->
+    <string name="android">玩安卓</string>
+    <string name="navi">导航数据</string>
+    <string name="everyday">每日推荐</string>
+    <string name="welfare">福利</string>
+
+    <string name="to_load_more">努力加载中...</string>
+    <string name="to_loaded">数据已加载完毕</string>
+    <string name="string_dot">&#160;·&#160;%s</string>
+    <string name="movie_nameless">佚名</string>
+    <string name="movie_nameless_type">不知名类型</string>
+    <string name="movie_type">类型：%s</string>
+    <string name="movie_rating">评分：%s</string>
+</resources>
