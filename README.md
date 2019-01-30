@@ -1,16 +1,31 @@
 # Cloud
+
+[![Apache License 2.0][1]][2]
+[![API][3]][4]
+
 一个MVVM+DataBinding+retrofit2+rxjava2搭建的项目.
 
-原项目为开源作者[youlookwhat][2]的[云阅][1],自己重构了框架以便自己学习.
-# 截图:
-<img width="173" height=“274” src="https://github.com/SoarY/Cloud/blob/master/file/page_menu_01.png?raw=true"></img>
+原项目为开源作者[youlookwhat][11]的[云阅][10],自己重构了框架以便自己学习.
+# Screenshots:
+<img width="173" height=“274” src="https://github.com/SoarY/Cloud/blob/master/file/img_01.png?raw=true"/>
+<img width="173" height=“274” src="https://github.com/SoarY/Cloud/blob/master/file/img_02.png?raw=true"/>
+<img width="173" height=“274” src="https://github.com/SoarY/Cloud/blob/master/file/img_03.png?raw=true"/>
+<img width="173" height=“274” src="https://github.com/SoarY/Cloud/blob/master/file/img_04.png?raw=true"/>
+<img width="173" height=“274” src="https://github.com/SoarY/Cloud/blob/master/file/img_05.png?raw=true"/>
+
 ## Thanks
- - 此项目UI,接口及部分实现参考开源作者[youlookwhat][1]
+ - 此项目UI,接口及部分实现参考开源作者[youlookwhat][11]
    非常感谢作者开源.
    
 ## License
 
 Apache 2.0. See the LICENSE file for details.
- 
- [1]:https://github.com/youlookwhat/CloudReader
- [2]:https://github.com/youlookwhat
+
+
+[1]:https://img.shields.io/:license-apache-blue.svg
+[2]:https://www.apache.org/licenses/LICENSE-2.0.html
+[3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
+[4]:https://android-arsenal.com/api?level=14
+
+[10]:https://github.com/youlookwhat/CloudReader
+[11]:https://github.com/youlookwhat
