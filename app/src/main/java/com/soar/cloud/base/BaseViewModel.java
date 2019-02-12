@@ -2,12 +2,15 @@ package com.soar.cloud.base;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.support.annotation.NonNull;
 
 import com.soar.cloud.event.ActivityLiveData;
 import com.soar.cloud.event.DialogLiveData;
 import com.soar.cloud.event.FinishLiveEvent;
 import com.soar.cloud.event.ToastLiveData;
+import com.soar.cloud.view.LoadingView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
@@ -21,6 +24,14 @@ public class BaseViewModel extends AndroidViewModel {
     private LifecycleProvider<ActivityEvent> lifecycle;
 
     public UIChangeLiveData uiLiveData = new UIChangeLiveData();
+
+    public ObservableInt whichChild = new ObservableInt();
+    public ObservableField<LoadingView.State> loadState = new ObservableField<>(LoadingView.State.done);
+
+    public void viewState(int i, LoadingView.State state) {
+        whichChild.set(i);
+        loadState.set(state);
+    }
 
     public BaseViewModel(@NonNull Application application) {
         super(application);

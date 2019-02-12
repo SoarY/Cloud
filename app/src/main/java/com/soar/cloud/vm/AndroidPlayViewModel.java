@@ -3,7 +3,6 @@ package com.soar.cloud.vm;
 import android.app.Application;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
 import android.support.annotation.NonNull;
 
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -19,6 +18,7 @@ import com.soar.cloud.bean.DataBean;
 import com.soar.cloud.constant.Constant;
 import com.soar.cloud.retrofit.APIException;
 import com.soar.cloud.retrofit.APIMain;
+import com.soar.cloud.retrofit.ExceptionEngine;
 import com.soar.cloud.retrofit.HttpResultFunc;
 import com.soar.cloud.retrofit.MyObserver;
 import com.soar.cloud.retrofit.RetrofitClient;
@@ -43,9 +43,6 @@ public class AndroidPlayViewModel extends BaseViewModel {
     public AndroidPlayAdapter adapter;
     public HeaderFooterAdapter headerAdapter = new HeaderFooterAdapter(adapter = new AndroidPlayAdapter());
 
-    public ObservableInt whichChild = new ObservableInt();
-    public ObservableField<LoadingView.State> loadState = new ObservableField<>(LoadingView.State.done);
-
     public ObservableField<List<Object>> bannerUrlDatas = new ObservableField<>();
     public ObservableField<List<String>> bannerTitleDatas = new ObservableField<>();
     public List<ArticlesBean> datas = new ArrayList<>();
@@ -61,11 +58,6 @@ public class AndroidPlayViewModel extends BaseViewModel {
 
     public void setCID(Integer cid) {
         this.cid = cid;
-    }
-
-    public void viewState(int i, LoadingView.State state) {
-        whichChild.set(i);
-        loadState.set(state);
     }
 
     public void getBannerData() {
@@ -123,7 +115,9 @@ public class AndroidPlayViewModel extends BaseViewModel {
 
             @Override
             protected void onError(APIException ex) {
-                viewState(1, LoadingView.State.error);
+                if (ex.getCode() == ExceptionEngine.ERROR.ERROR_NET)
+                    uiLiveData.toastEvent.show(ex.getDisplayMessage());
+                viewState(1, ex.getCode() == ExceptionEngine.ERROR.ERROR_NET ? LoadingView.State.error : LoadingView.State.error);
             }
 
             @Override

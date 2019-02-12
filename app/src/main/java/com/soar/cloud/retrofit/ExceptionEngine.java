@@ -1,6 +1,7 @@
 package com.soar.cloud.retrofit;
 
 import com.google.gson.JsonParseException;
+import com.soar.cloud.utils.NetworkUtils;
 
 import org.json.JSONException;
 
@@ -19,7 +20,11 @@ public class ExceptionEngine {
 
     public static APIException handleException(Throwable e) {
         APIException ex;
-        if (e instanceof HttpException) {//HTTP错误
+        if (!NetworkUtils.isNetworkConnected()) {
+            ex = new APIException(e, ERROR.ERROR_NET);
+            ex.setDisplayMessage("当前网络不可用,请检查你的网络设置");
+            return ex;
+        } else if (e instanceof HttpException) {//HTTP错误
             HttpException httpException = (HttpException) e;
             ex = new APIException(e, ERROR.HTTP_ERROR);
             switch (httpException.code()) {
@@ -48,7 +53,7 @@ public class ExceptionEngine {
             return ex;
         } else if (e instanceof UnknownHostException) {
             ex = new APIException(e, ERROR.NETWORD_ERROR);
-            ex.setDisplayMessage("当前网络不可用,请检查你的网络设置");
+            ex.setDisplayMessage("连接失败");
             return ex;
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
@@ -124,5 +129,10 @@ public class ExceptionEngine {
          * 连接超时
          */
         public static final int TIMEOUT_ERROR = 1006;
+
+        /**
+         * 无网络
+         */
+        public static final int ERROR_NET = 1007;
     }
 }

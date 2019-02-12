@@ -21,6 +21,6 @@ public class CommonUtils {
      * 向上取偶
      */
     public static int takeEven(int value) {
-        return value%2!=0?value+1:value;
+        return value % 2 != 0 ? value + 1 : value;
     }
 }

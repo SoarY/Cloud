@@ -2,7 +2,6 @@ package com.soar.cloud.vm;
 
 import android.app.Application;
 import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
 import android.os.Handler;
 import android.text.TextUtils;
 
@@ -37,9 +36,6 @@ import io.reactivex.disposables.Disposable;
  */
 public class EverydayViewModel extends BaseViewModel {
 
-    public ObservableInt whichChild = new ObservableInt();
-    public ObservableField<LoadingView.State> loadState = new ObservableField<>(LoadingView.State.done);
-
     public ObservableField<List<Object>> bannerDatas = new ObservableField<>();
 
     public EverydayAdapter adapter;
@@ -47,11 +43,6 @@ public class EverydayViewModel extends BaseViewModel {
 
     public EverydayViewModel(Application application) {
         super(application);
-    }
-
-    public void viewState(int i, LoadingView.State state) {
-        whichChild.set(i);
-        loadState.set(state);
     }
 
     public void getBannerData() {
@@ -85,7 +76,9 @@ public class EverydayViewModel extends BaseViewModel {
 
             @Override
             protected void onError(APIException ex) {
-                viewState(1, LoadingView.State.error);
+                if (ex.getCode() == ExceptionEngine.ERROR.ERROR_NET)
+                    uiLiveData.toastEvent.show(ex.getDisplayMessage());
+                viewState(1, ex.getCode() == ExceptionEngine.ERROR.ERROR_NET ? LoadingView.State.error : LoadingView.State.error);
             }
 
             @Override

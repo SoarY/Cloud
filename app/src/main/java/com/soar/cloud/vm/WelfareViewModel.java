@@ -2,8 +2,6 @@ package com.soar.cloud.vm;
 
 import android.app.Application;
 import android.databinding.ObservableBoolean;
-import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
 import android.support.annotation.NonNull;
 
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -34,9 +32,6 @@ import io.reactivex.disposables.Disposable;
  */
 public class WelfareViewModel extends BaseViewModel {
 
-    public ObservableInt whichChild = new ObservableInt();
-    public ObservableField<LoadingView.State> loadState = new ObservableField<>(LoadingView.State.done);
-
     private int pageIndex = Constant.pageIndex;
     private int pageSize = Constant.pageSize;
 
@@ -48,11 +43,6 @@ public class WelfareViewModel extends BaseViewModel {
 
     public WelfareViewModel(@NonNull Application application) {
         super(application);
-    }
-
-    public void viewState(int i, LoadingView.State state) {
-        whichChild.set(i);
-        loadState.set(state);
     }
 
     public void getGankIoData(boolean isRefreshOrLoad) {
@@ -80,7 +70,12 @@ public class WelfareViewModel extends BaseViewModel {
 
             @Override
             protected void onError(APIException ex) {
-                viewState(1, LoadingView.State.error);
+                if (ex.getCode() == ExceptionEngine.ERROR.ERROR_NET){
+                    uiLiveData.toastEvent.show(ex.getDisplayMessage());
+                    viewState(1,  LoadingView.State.error);
+                }else {
+                    viewState(1,  LoadingView.State.error);
+                }
             }
 
             @Override
