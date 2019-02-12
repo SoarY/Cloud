@@ -16,4 +16,11 @@ public class CommonUtils {
         final float scale = MyApplication.getContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
+
+    /**
+     * 向上取偶
+     */
+    public static int takeEven(int value) {
+        return value%2!=0?value+1:value;
+    }
 }

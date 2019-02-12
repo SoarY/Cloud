@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -50,19 +51,20 @@ public class BindAdapter {
 
     @BindingAdapter(value = {"bannerData", "bannerTitle"}, requireAll = false)
     public static void setBannerData(Banner view, List<Object> datas, List<String> titles) {
-        if (titles!=null)
+        if (titles != null)
             view.setBannerTitles(titles);
-        if (datas!=null&&datas.size()>0)
+        if (datas != null && datas.size() > 0)
             view.setImages(datas).start();
     }
 
     @BindingAdapter(value = {"imgSource", "placeholder", "errorholder"}, requireAll = false)
     public static void setImgSource(ImageView view, String imgSource, Drawable placeholder, Drawable errorholder) {
+        RequestOptions options = new RequestOptions()
+                .placeholder(placeholder)
+                .error(errorholder);
         Glide.with(view.getContext())
                 .load(imgSource)
-                .placeholder(placeholder)
-                .error(errorholder)
-                .crossFade(500)
+                .apply(options)
                 .into(view);
     }
 }

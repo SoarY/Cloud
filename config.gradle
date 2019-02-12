@@ -42,7 +42,7 @@ ext {
             //banner轮播
             banner                : "com.youth.banner:banner:1.4.10",
             //Glide
-            glide                 : "com.github.bumptech.glide:glide:3.8.0",
+            glide                 : "com.github.bumptech.glide:glide:4.8.0",
             //SmartRefreshLayout
             smartRefreshLayout    : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-19",
             smartRefreshHeader    : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-19",

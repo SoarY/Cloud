@@ -45,6 +45,7 @@ public class NaviFragment extends BaseLazyFragment<FragmentNaviBinding, NaviView
 
     private void initView() {
         viewModel.adapter.setOnSelectListener(position -> ((LinearLayoutManager) binding.xrvNaviDetail.getLayoutManager()).scrollToPositionWithOffset(position,0));
+        binding.loadingView.setOnRetryListener(() ->lazyData() );
     }
 
     @Override

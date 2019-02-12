@@ -15,6 +15,7 @@ import com.soar.cloud.databinding.FragmentEverydayBinding;
 import com.soar.cloud.databinding.HeaderItemEverydayBinding;
 import com.soar.cloud.utils.ToastUtils;
 import com.soar.cloud.view.GlideImageLoader;
+import com.soar.cloud.view.LoadingView;
 import com.soar.cloud.vm.EverydayViewModel;
 
 
@@ -82,6 +83,7 @@ public class EverydayFragment extends BaseLazyFragment<FragmentEverydayBinding, 
 
     @Override
     protected void lazyData() {
+        viewModel.viewState(1, LoadingView.State.ing);
         viewModel.getBannerData();
         viewModel.getGankIoDay();
     }

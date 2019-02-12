@@ -64,6 +64,7 @@ public class NaviViewModel extends BaseViewModel {
 
             @Override
             protected void onError(APIException ex) {
+                viewState(1, LoadingView.State.error);
             }
 
             @Override

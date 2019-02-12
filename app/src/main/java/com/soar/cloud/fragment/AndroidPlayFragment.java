@@ -14,6 +14,7 @@ import com.soar.cloud.databinding.FragmentAndroidPlayBinding;
 import com.soar.cloud.databinding.HeaderAndroidPalyBinding;
 import com.soar.cloud.utils.ToastUtils;
 import com.soar.cloud.view.GlideImageLoader;
+import com.soar.cloud.view.LoadingView;
 import com.soar.cloud.vm.AndroidPlayViewModel;
 import com.youth.banner.BannerConfig;
 
@@ -79,6 +80,7 @@ public class AndroidPlayFragment extends BaseLazyFragment<FragmentAndroidPlayBin
 
     @Override
     protected void lazyData() {
+        viewModel.viewState(1, LoadingView.State.ing);
         viewModel.getBannerData();
         viewModel.getHomeList(true);
     }

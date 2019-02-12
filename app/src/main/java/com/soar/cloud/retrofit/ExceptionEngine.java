@@ -48,7 +48,7 @@ public class ExceptionEngine {
             return ex;
         } else if (e instanceof UnknownHostException) {
             ex = new APIException(e, ERROR.NETWORD_ERROR);
-            ex.setDisplayMessage("无网络访问");
+            ex.setDisplayMessage("当前网络不可用,请检查你的网络设置");
             return ex;
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException

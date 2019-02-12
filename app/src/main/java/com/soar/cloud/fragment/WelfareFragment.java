@@ -48,7 +48,12 @@ public class WelfareFragment extends BaseLazyFragment<FragmentWelfareBinding, We
 
     private void initView() {
         binding.recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-        binding.recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, CommonUtils.dip2px(4)));
+        /**
+         * 下拉刷新成功后显示会闪一下
+         * CommonUtils.takeEven
+         * 取偶设置上下左右边距是一样的话，系统就会复用，就消除了图片不能复用 闪跳的情况
+         */
+        binding.recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, CommonUtils.takeEven(CommonUtils.dip2px(4))));
 
         viewModel.adapter.setItemClickListener(position -> ToastUtils.showToast(position + ""));
     }

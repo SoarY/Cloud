@@ -9,29 +9,41 @@
             type="com.soar.cloud.vm.AndroidPlayViewModel" />
     </data>
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
-        onLoadMoreListener="@{vm.onLoadMore}"
-        onRefreshListener="@{vm.onRefresh}"
-        stopRefresh="@{vm.stopRefresh}"
+    <ViewSwitcher
+        viewSwitcher="@{vm.whichChild}"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlAccentColor="@color/colorPrimary"
-        app:srlPrimaryColor="@color/colorPrimary">
+        android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.header.MaterialHeader
-            android:id="@+id/material_header_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            onLoadMoreListener="@{vm.onLoadMore}"
+            onRefreshListener="@{vm.onRefresh}"
+            stopRefresh="@{vm.stopRefresh}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:adapter="@{vm.headerAdapter}"
-            android:scrollbars="vertical"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+            app:srlAccentColor="@color/colorPrimary"
+            app:srlPrimaryColor="@color/colorPrimary">
 
-        <include layout="@layout/inc_cloud_footer" />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:id="@+id/material_header_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adapter="@{vm.headerAdapter}"
+                android:scrollbars="vertical"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+            <include layout="@layout/inc_cloud_footer" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+        <com.soar.cloud.view.LoadingView
+            android:id="@+id/loading_view"
+            loadState="@{vm.loadState}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ViewSwitcher>
 </layout>

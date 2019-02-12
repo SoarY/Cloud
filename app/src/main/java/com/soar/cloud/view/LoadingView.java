@@ -54,7 +54,7 @@ public class LoadingView extends FrameLayout implements OnClickListener {
         empty = (LinearLayout) findViewById(R.id.empty);
         error = (LinearLayout) findViewById(R.id.error);
         loading = (LinearLayout) findViewById(R.id.loading);
-        ((AnimationDrawable)((ImageView)findViewById(R.id.img_progress)).getDrawable()).start();
+        ((AnimationDrawable) ((ImageView) findViewById(R.id.img_progress)).getDrawable()).start();
         setOnClickListener(this);
         notifyDataChanged(State.ing);
     }
@@ -106,7 +106,7 @@ public class LoadingView extends FrameLayout implements OnClickListener {
     public void onClick(View v) {
         if (listener != null)
             listener.onRetry();
-        //        if (listener != null && state == State.error)
-        //            listener.onRetry();
+        if (listener != null && (state == State.error || state == State.empty))
+            listener.onRetry();
     }
 }

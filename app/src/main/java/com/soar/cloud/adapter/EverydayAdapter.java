@@ -7,16 +7,15 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.soar.cloud.R;
 import com.soar.cloud.bean.AndroidBean;
 import com.soar.cloud.databinding.ItemEverydayOneBinding;
 import com.soar.cloud.databinding.ItemEverydayThreeBinding;
 import com.soar.cloud.databinding.ItemEverydayTitleBinding;
 import com.soar.cloud.databinding.ItemEverydayTwoBinding;
-import com.soar.cloud.utils.CommonUtils;
 
 import java.util.List;
 
@@ -106,11 +105,12 @@ public class EverydayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void bindOneHolder(OneHolder holder, int position) {
         List<AndroidBean> item = getItem(position);
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.mipmap.ic_item_one)
+                .error(R.mipmap.ic_item_one);
         Glide.with(holder.binding.ivOnePhoto.getContext())
                 .load(item.get(0).getImage_url())
-                .placeholder(R.mipmap.ic_item_one)
-                .error(R.mipmap.ic_item_one)
-                .crossFade(1500)
+                .apply(options)
                 .into(holder.binding.ivOnePhoto);
         holder.binding.tvOnePhotoTitle.setText(item.get(0).getDesc());
         holder.binding.executePendingBindings();
@@ -118,17 +118,16 @@ public class EverydayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void bindTwoHolder(TwoHolder holder, int position) {
         List<AndroidBean> item = getItem(position);
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.mipmap.ic_item_one)
+                .error(R.mipmap.ic_item_one);
         Glide.with(holder.binding.ivTwoOneOne.getContext())
                 .load(item.get(0).getImage_url())
-                .placeholder(R.mipmap.ic_item_one)
-                .error(R.mipmap.ic_item_one)
-                .crossFade(1500)
+                .apply(options)
                 .into(holder.binding.ivTwoOneOne);
         Glide.with(holder.binding.ivTwoOneTwo.getContext())
                 .load(item.get(1).getImage_url())
-                .placeholder(R.mipmap.ic_item_one)
-                .error(R.mipmap.ic_item_one)
-                .crossFade(1500)
+                .apply(options)
                 .into(holder.binding.ivTwoOneTwo);
         holder.binding.tvTwoOneOneTitle.setText(item.get(0).getDesc());
         holder.binding.tvTwoOneTwoTitle.setText(item.get(1).getDesc());
@@ -137,23 +136,20 @@ public class EverydayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void bindThreeHolder(ThreeHolder holder, int position) {
         List<AndroidBean> item = getItem(position);
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.mipmap.ic_item_one)
+                .error(R.mipmap.ic_item_one);
         Glide.with(holder.binding.ivThreeOneOne.getContext())
                 .load(item.get(0).getImage_url())
-                .placeholder(R.mipmap.ic_item_one)
-                .error(R.mipmap.ic_item_one)
-                .dontAnimate()
+                .apply(options)
                 .into(holder.binding.ivThreeOneOne);
         Glide.with(holder.binding.ivThreeOneTwo.getContext())
                 .load(item.get(1).getImage_url())
-                .placeholder(R.mipmap.ic_item_one)
-                .error(R.mipmap.ic_item_one)
-                .dontAnimate()
+                .apply(options)
                 .into(holder.binding.ivThreeOneTwo);
         Glide.with(holder.binding.ivThreeOneThree.getContext())
                 .load(item.get(2).getImage_url())
-                .placeholder(R.mipmap.ic_item_one)
-                .error(R.mipmap.ic_item_one)
-                .dontAnimate()
+                .apply(options)
                 .into(holder.binding.ivThreeOneThree);
         holder.binding.tvThreeOneOneTitle.setText(item.get(0).getDesc());
         holder.binding.tvThreeOneTwoTitle.setText(item.get(1).getDesc());
