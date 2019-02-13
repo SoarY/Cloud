@@ -101,10 +101,6 @@ public class AndroidPlayViewModel extends BaseViewModel {
         instance.toSubscribe(getLifecycleProvider(), observable, new MyObserver<DataBean>() {
 
             @Override
-            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-            }
-
-            @Override
             public void onNext(DataBean data) {
                 if (pretreatment(data, isRefreshOrLoad)) return;
                 //数据操作
@@ -118,10 +114,6 @@ public class AndroidPlayViewModel extends BaseViewModel {
                 if (ex.getCode() == ExceptionEngine.ERROR.ERROR_NET)
                     uiLiveData.toastEvent.show(ex.getDisplayMessage());
                 viewState(1, ex.getCode() == ExceptionEngine.ERROR.ERROR_NET ? LoadingView.State.error : LoadingView.State.error);
-            }
-
-            @Override
-            public void onComplete() {
             }
         });
     }

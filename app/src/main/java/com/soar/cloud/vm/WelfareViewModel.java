@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * NAME：YONG_
@@ -57,10 +56,6 @@ public class WelfareViewModel extends BaseViewModel {
         instance.toSubscribe(getLifecycleProvider(), observable, new MyObserver<GankIoDataBean>() {
 
             @Override
-            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-            }
-
-            @Override
             public void onNext(GankIoDataBean bean) {
                 if (pretreatment(bean, isRefreshOrLoad)) return;
                 List<GankIoDataBean.ResultBean> results = bean.getResults();
@@ -70,16 +65,7 @@ public class WelfareViewModel extends BaseViewModel {
 
             @Override
             protected void onError(APIException ex) {
-                if (ex.getCode() == ExceptionEngine.ERROR.ERROR_NET){
-                    uiLiveData.toastEvent.show(ex.getDisplayMessage());
-                    viewState(1,  LoadingView.State.error);
-                }else {
-                    viewState(1,  LoadingView.State.error);
-                }
-            }
-
-            @Override
-            public void onComplete() {
+                viewState(1, ex.getCode() == ExceptionEngine.ERROR.ERROR_NET ? LoadingView.State.error : LoadingView.State.error);
             }
         });
     }

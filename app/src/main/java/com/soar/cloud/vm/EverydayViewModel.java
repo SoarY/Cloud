@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Random;
 
 import io.reactivex.Observable;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 
 /**
  * NAME：YONG_
@@ -65,10 +63,6 @@ public class EverydayViewModel extends BaseViewModel {
         instance.toSubscribe(getLifecycleProvider(), observable, new MyObserver<List<List<AndroidBean>>>() {
 
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
-            }
-
-            @Override
             public void onNext(List<List<AndroidBean>> datas) {
                 adapter.setData(datas);
                 viewState(0, LoadingView.State.done);
@@ -79,10 +73,6 @@ public class EverydayViewModel extends BaseViewModel {
                 if (ex.getCode() == ExceptionEngine.ERROR.ERROR_NET)
                     uiLiveData.toastEvent.show(ex.getDisplayMessage());
                 viewState(1, ex.getCode() == ExceptionEngine.ERROR.ERROR_NET ? LoadingView.State.error : LoadingView.State.error);
-            }
-
-            @Override
-            public void onComplete() {
             }
         });
     }

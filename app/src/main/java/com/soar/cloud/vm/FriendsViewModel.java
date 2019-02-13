@@ -16,7 +16,6 @@ import com.soar.cloud.retrofit.RetrofitClient;
 import com.soar.cloud.view.LoadingView;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * NAME：YONG_
@@ -39,10 +38,6 @@ public class FriendsViewModel extends BaseViewModel {
         instance.toSubscribe(getLifecycleProvider(), observable, new MyObserver<HotMovieBean>() {
 
             @Override
-            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-            }
-
-            @Override
             public void onNext(HotMovieBean bean) {
                 adapter.setData(bean.subjects);
                 viewState(0, LoadingView.State.done);
@@ -53,10 +48,6 @@ public class FriendsViewModel extends BaseViewModel {
                 if (ex.getCode() == ExceptionEngine.ERROR.ERROR_NET)
                     uiLiveData.toastEvent.show(ex.getDisplayMessage());
                 viewState(1, ex.getCode() == ExceptionEngine.ERROR.ERROR_NET ? LoadingView.State.error : LoadingView.State.error);
-            }
-
-            @Override
-            public void onComplete() {
             }
         });
     }

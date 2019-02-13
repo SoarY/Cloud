@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * NAME：YONG_
@@ -57,10 +56,6 @@ public class ArticleListViewModel extends BaseViewModel {
         instance.toSubscribe(getLifecycleProvider(), observable, new MyObserver<GankIoDataBean>() {
 
             @Override
-            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-            }
-
-            @Override
             public void onNext(GankIoDataBean bean) {
                 if (pretreatment(bean, isRefreshOrLoad)) return;
                 List<GankIoDataBean.ResultBean> results = bean.getResults();
@@ -70,10 +65,6 @@ public class ArticleListViewModel extends BaseViewModel {
 
             @Override
             protected void onError(APIException ex) {
-            }
-
-            @Override
-            public void onComplete() {
             }
         });
     }
