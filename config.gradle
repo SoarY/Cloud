@@ -50,6 +50,8 @@ ext {
             bottomNavigationViewEx: "com.github.ittianyu:BottomNavigationViewEx:2.0.2",
             //flowlayout
             flowlayout            : "com.hyman:flowlayout-lib:1.1.2",
+            //PhotoView
+            PhotoView             : "com.github.chrisbanes:PhotoView:2.0.0",
     ]
 }
 

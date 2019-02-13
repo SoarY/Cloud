@@ -7,15 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.soar.cloud.BR;
 import com.soar.cloud.R;
+import com.soar.cloud.activity.ImageActivity;
 import com.soar.cloud.base.BaseLazyFragment;
+import com.soar.cloud.bean.GankIoDataBean;
+import com.soar.cloud.constant.RouteConstants;
 import com.soar.cloud.databinding.FragmentWelfareBinding;
 import com.soar.cloud.utils.CommonUtils;
-import com.soar.cloud.utils.ToastUtils;
 import com.soar.cloud.view.GridSpacingItemDecoration;
 import com.soar.cloud.view.LoadingView;
 import com.soar.cloud.vm.WelfareViewModel;
+
+import java.util.ArrayList;
 
 
 /**
@@ -55,7 +60,17 @@ public class WelfareFragment extends BaseLazyFragment<FragmentWelfareBinding, We
          */
         binding.recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, CommonUtils.takeEven(CommonUtils.dip2px(4))));
 
-        viewModel.adapter.setItemClickListener(position -> ToastUtils.showToast(position + ""));
+        viewModel.adapter.setItemClickListener(position -> {
+                    ArrayList<String> imageUrls = new ArrayList<>();
+                    for (GankIoDataBean.ResultBean data : viewModel.datas)
+                        imageUrls.add(data.url);
+                    ARouter.getInstance()
+                            .build(RouteConstants.Discover.WELFARE_IMG)
+                            .withInt(ImageActivity.POSITION,position)
+                            .withStringArrayList(ImageActivity.IMAGE_URLS, imageUrls)
+                            .navigation();
+                }
+        );
     }
 
     @Override

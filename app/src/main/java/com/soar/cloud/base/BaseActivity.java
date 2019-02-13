@@ -27,7 +27,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     public VM viewModel;
     public V binding;
 
-    private Activity context;
+    public Activity context;
 
     /**
      * 初始化根布局

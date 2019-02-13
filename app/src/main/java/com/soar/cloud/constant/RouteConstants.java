@@ -9,9 +9,16 @@ public interface RouteConstants {
     }
 
     /**
-     * 玩安卓
+     * 音乐模块
      */
-    interface AndroidPlay {
+    interface Music {
         String ARTICLE = "/androidplay/article";
+    }
+
+    /**
+     * 迪斯科模块
+     */
+    interface Discover {
+        String WELFARE_IMG = "/androidplay/welfareimg";
     }
 }

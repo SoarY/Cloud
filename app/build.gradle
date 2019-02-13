@@ -69,4 +69,6 @@ dependencies {
     implementation thirdLibs.bottomNavigationViewEx
     //flowlayout
     implementation thirdLibs.flowlayout
+    //PhotoView
+    implementation thirdLibs.PhotoView
 }

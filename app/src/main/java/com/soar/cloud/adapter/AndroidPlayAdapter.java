@@ -3,6 +3,7 @@ package com.soar.cloud.adapter;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.soar.cloud.BR;
 import com.soar.cloud.R;
+import com.soar.cloud.activity.ArticleListActivity;
 import com.soar.cloud.base.BaseAdapter;
 import com.soar.cloud.bean.ArticlesBean;
 import com.soar.cloud.constant.RouteConstants;
@@ -24,9 +25,9 @@ public class AndroidPlayAdapter extends BaseAdapter<ArticlesBean, ItemAndroidPla
         holder.binding.setVariable(BR.item, data);
         holder.binding.tvClassify.setOnClickListener(v ->
                 ARouter.getInstance()
-                        .build(RouteConstants.AndroidPlay.ARTICLE)
-                        .withInt("cid", data.getChapterId())
-                        .withString("chapterName", data.getChapterName())
+                        .build(RouteConstants.Music.ARTICLE)
+                        .withInt(ArticleListActivity.CID, data.getChapterId())
+                        .withString(ArticleListActivity.CHAPTER_NAME, data.getChapterName())
                         .navigation());
     }
 

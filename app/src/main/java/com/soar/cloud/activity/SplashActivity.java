@@ -9,6 +9,7 @@ import com.soar.cloud.base.BaseActivity;
 import com.soar.cloud.base.BaseViewModel;
 import com.soar.cloud.constant.RouteConstants;
 import com.soar.cloud.databinding.ActivitySplashBinding;
+import com.soar.cloud.view.StatusBarCompat;
 
 
 public class SplashActivity extends BaseActivity<ActivitySplashBinding, BaseViewModel> {
@@ -32,6 +33,8 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, BaseView
     }
 
     private void initView() {
+        StatusBarCompat.setTransparentStatus(context);
+
         new Handler().postDelayed(() -> {
             ARouter.getInstance()
                     .build(RouteConstants.Rule.MAIN_ACTIVITY)

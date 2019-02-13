@@ -17,8 +17,11 @@ import com.soar.cloud.vm.AndroidPlayViewModel;
  * Created at: 2019/1/10
  * Describe:
  */
-@Route(path = RouteConstants.AndroidPlay.ARTICLE)
+@Route(path = RouteConstants.Music.ARTICLE)
 public class ArticleListActivity extends BaseActivity<ActivityArticleListBinding, AndroidPlayViewModel> {
+
+    public static final String CID = "cid";
+    public static final String CHAPTER_NAME = "chapterName";
 
     @Autowired
     public int cid;

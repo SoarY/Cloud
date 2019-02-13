@@ -2,6 +2,7 @@ package com.soar.cloud.binding;
 
 import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
+import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
@@ -22,6 +23,11 @@ import java.util.List;
  * Describe:
  */
 public class BindAdapter {
+
+    @BindingAdapter("onPageChangeListener")
+    public static void addOnPageChangeListener(ViewPager view, ViewPager.OnPageChangeListener listener) {
+        view.addOnPageChangeListener(listener);
+    }
 
     @BindingAdapter("onRefreshListener")
     public static void setOnRefreshListener(SmartRefreshLayout view, OnRefreshListener listener) {
