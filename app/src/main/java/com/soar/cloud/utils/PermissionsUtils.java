@@ -1,20 +1,15 @@
 package com.soar.cloud.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.provider.Settings;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 
 import com.soar.cloud.R;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.yanzhenjie.permission.AndPermission;
 
 /**
  * NAME：YONG_
  * Created at: 2019/2/14
- * Describe:
+ * Describe: https://www.jianshu.com/p/a9f28cc81c9c
  */
 public class PermissionsUtils {
 
@@ -22,20 +17,18 @@ public class PermissionsUtils {
         void onSucceed();
     }
 
-    @SuppressLint("CheckResult")
-    public static void checkPermission(Context context, PermissionListener listener, String... permissions) {
-        new RxPermissions((FragmentActivity) context)
-                .requestEach(permissions)
-                .subscribe(permission -> {
-                    if (permission.granted) {
-                        // `permission.name` is granted !
-                        listener.onSucceed();
-                    } else if (permission.shouldShowRequestPermissionRationale) {
-                        // Denied permission without ask never again
-                    } else {
-                        showDialog(context);
+    public static void checkPermission(Context mContext, PermissionListener listener, String... mPermissions) {
+        AndPermission.with(mContext)
+                .permission(mPermissions)
+                .onGranted(permissions -> listener.onSucceed())
+                // 用户拒绝权限，包括不再显示权限弹窗也在此列
+                .onDenied(permissions -> {
+                    // 判断用户是不是不再显示权限弹窗了，若不再显示的话进入权限设置页
+                    if (AndPermission.hasAlwaysDeniedPermission(mContext, permissions)) {
+                        showDialog(mContext);
+                        return;
                     }
-                });
+                }).start();
     }
 
     private static void showDialog(Context context) {
@@ -43,18 +36,11 @@ public class PermissionsUtils {
                 .setTitle(context.getString(R.string.permission_title_permission_failed))
                 .setMessage(context.getString(R.string.permission_message_permission_failed))
                 .setPositiveButton(context.getString(R.string.permission_setting), (dialog, which) -> {
-                    toSetting(context);
+                    AndPermission.permissionSetting(context).execute();
                     dialog.dismiss();
                 })
                 .setNegativeButton(context.getString(R.string.permission_cancel), (dialog, which) -> dialog.dismiss())
                 .create()
                 .show();
-    }
-
-    private static void toSetting(Context context) {
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", context.getPackageName(), null);
-        intent.setData(uri);
-        context.startActivity(intent);
     }
 }

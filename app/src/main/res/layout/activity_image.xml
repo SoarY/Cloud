@@ -48,6 +48,7 @@
                 android:layout_marginRight="13dp"
                 android:layout_marginBottom="17dp"
                 android:background="@drawable/shape_gray_rim"
+                android:onClick="@{vm.keepOnClickListener}"
                 android:text="保存"
                 android:textColor="#fff"
                 android:textSize="13sp" />

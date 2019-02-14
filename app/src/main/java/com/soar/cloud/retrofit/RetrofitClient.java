@@ -45,19 +45,12 @@ public class RetrofitClient {
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .baseUrl(urlMain)
-//                    .client(getOkClient())
                     .build();
             API api = retrofit.create(API.class);
             apis.put(urlMain, api);
         }
         return apis.get(urlMain);
     }
-
-//    private OkHttpClient getOkClient() {
-//        OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-//        okBuilder.hostnameVerifier((hostname, session) -> true);
-//        return okBuilder.build();
-//    }
 
     /**
      * 订阅
