@@ -71,4 +71,6 @@ dependencies {
     implementation thirdLibs.flowlayout
     //PhotoView
     implementation thirdLibs.PhotoView
+    //RxPermissions
+    implementation thirdLibs.RxPermissions
 }

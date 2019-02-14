@@ -10,6 +10,11 @@
     <string name="everyday">每日推荐</string>
     <string name="welfare">福利</string>
 
+    <string name="permission_title_permission_failed">权限申请失败</string>
+    <string name="permission_message_permission_failed">我们需要的一些权限被您拒绝或者系统发生错误申请失败，请您到设置页面手动授权，否则功能无法正常使用！</string>
+    <string name="permission_cancel">取消</string>
+    <string name="permission_setting">去设置</string>
+
     <string name="to_load_more">努力加载中...</string>
     <string name="to_loaded">数据已加载完毕</string>
     <string name="string_dot">&#160;·&#160;%s</string>

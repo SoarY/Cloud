@@ -52,6 +52,8 @@ ext {
             flowlayout            : "com.hyman:flowlayout-lib:1.1.2",
             //PhotoView
             PhotoView             : "com.github.chrisbanes:PhotoView:2.0.0",
+            //RxPermissions
+            RxPermissions         : "com.github.tbruyelle:rxpermissions:0.10.2",
     ]
 }
 

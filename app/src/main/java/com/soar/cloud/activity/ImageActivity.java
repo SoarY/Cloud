@@ -9,8 +9,11 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.soar.cloud.BR;
 import com.soar.cloud.R;
 import com.soar.cloud.base.BaseActivity;
+import com.soar.cloud.constant.DangerousPermissions;
 import com.soar.cloud.constant.RouteConstants;
 import com.soar.cloud.databinding.ActivityImageBinding;
+import com.soar.cloud.utils.PermissionsUtils;
+import com.soar.cloud.utils.ToastUtils;
 import com.soar.cloud.view.StatusBarCompat;
 import com.soar.cloud.vm.ImageViewModel;
 
@@ -57,5 +60,9 @@ public class ImageActivity extends BaseActivity<ActivityImageBinding, ImageViewM
         binding.viewPager.setAdapter(viewModel.adapter);
         binding.viewPager.setCurrentItem(position);
         viewModel.position.set(position);
+
+        binding.tvKeep.setOnClickListener(v -> PermissionsUtils.checkPermission(context, () -> {
+            ToastUtils.showToast("ok");
+        }, DangerousPermissions.READ_EXTERNAL_STORAGE));
     }
 }
