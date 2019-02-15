@@ -82,11 +82,9 @@ public class ImageViewModel extends BaseViewModel {
                         appDir.mkdirs();
                     String fileName = CommonUtils.MD5(((File) file).getName()) + ".jpg";
                     File destFile = new File(appDir, fileName);
-                    if (!destFile.exists()) {
-                        FileUtils.copy((File) file, destFile);
-                        // 最后通知图库更新
-                        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(destFile.getPath()))));
-                    }
+                    FileUtils.copy((File) file, destFile);
+                    // 最后通知图库更新
+                    context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(destFile.getPath()))));
                     uiLiveData.toastEvent.show(String.format(context.getString(R.string.success_img_keep), context.getString(R.string.app_name)));
                 });
     }
