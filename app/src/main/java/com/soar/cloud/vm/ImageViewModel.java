@@ -24,6 +24,7 @@ import com.soar.cloud.utils.PermissionsUtils;
 import java.io.File;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -64,11 +65,11 @@ public class ImageViewModel extends BaseViewModel {
         }
     };
 
-    public View.OnClickListener keepOnClickListener = v -> PermissionsUtils.checkPermission(context, this::downloadImg, DangerousPermissions.WRITE_EXTERNAL_STORAGE);
+    public View.OnClickListener keepOnClickListener = v -> PermissionsUtils.checkPermission(context, permissions -> downloadImg(), DangerousPermissions.WRITE_EXTERNAL_STORAGE);
 
     @SuppressLint("CheckResult")
     private void downloadImg() {
-        Observable.create(emitter ->
+        Observable.create((ObservableEmitter<File> emitter) ->
                 emitter.onNext(Glide.with(context)
                         .load(adapter.getItem(position.get()))
                         .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
@@ -80,9 +81,9 @@ public class ImageViewModel extends BaseViewModel {
                     File appDir = new File(pictureFolder, context.getString(R.string.app_name));
                     if (!appDir.exists())
                         appDir.mkdirs();
-                    String fileName = CommonUtils.MD5(((File) file).getName()) + ".jpg";
+                    String fileName = CommonUtils.MD5(file.getName()) + ".jpg";
                     File destFile = new File(appDir, fileName);
-                    FileUtils.copy((File) file, destFile);
+                    FileUtils.copy(file, destFile);
                     // 最后通知图库更新
                     context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(destFile.getPath()))));
                     uiLiveData.toastEvent.show(String.format(context.getString(R.string.success_img_keep), context.getString(R.string.app_name)));

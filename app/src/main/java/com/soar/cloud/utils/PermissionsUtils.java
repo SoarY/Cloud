@@ -4,7 +4,11 @@ import android.content.Context;
 import android.support.v7.app.AlertDialog;
 
 import com.soar.cloud.R;
+import com.soar.cloud.imp.Consumer;
 import com.yanzhenjie.permission.AndPermission;
+
+import java.util.List;
+
 
 /**
  * NAME：YONG_
@@ -13,14 +17,10 @@ import com.yanzhenjie.permission.AndPermission;
  */
 public class PermissionsUtils {
 
-    public interface PermissionListener {
-        void onSucceed();
-    }
-
-    public static void checkPermission(Context mContext, PermissionListener listener, String... mPermissions) {
+    public static void checkPermission(Context mContext, Consumer<List<String>> consumer, String... mPermissions) {
         AndPermission.with(mContext)
                 .permission(mPermissions)
-                .onGranted(permissions -> listener.onSucceed())
+                .onGranted(consumer::accept)
                 // 用户拒绝权限，包括不再显示权限弹窗也在此列
                 .onDenied(permissions -> {
                     // 判断用户是不是不再显示权限弹窗了，若不再显示的话进入权限设置页
