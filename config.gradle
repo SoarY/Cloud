@@ -54,6 +54,8 @@ ext {
             PhotoView             : "com.github.chrisbanes:PhotoView:2.0.0",
             //AndPermission
             AndPermission         : "com.yanzhenjie:permission:2.0.0-rc12",
+            //stream
+            stream                : "com.annimon:stream:1.2.1",
     ]
 }
 

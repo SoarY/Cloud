@@ -34,6 +34,15 @@ android {
     }
 }
 
+//configurations.all {
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        def requested = details.requested
+//        if (requested.group == 'com.android.support')
+//            if (!requested.name.startsWith("multidex"))
+//                details.useVersion versions.support
+//    }
+//}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation authority.junit
@@ -73,4 +82,6 @@ dependencies {
     implementation thirdLibs.PhotoView
     //AndPermission
     implementation thirdLibs.AndPermission
+    //stream
+    implementation thirdLibs.stream
 }

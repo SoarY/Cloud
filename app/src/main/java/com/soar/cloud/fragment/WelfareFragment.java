@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.annimon.stream.Stream;
 import com.soar.cloud.BR;
 import com.soar.cloud.R;
 import com.soar.cloud.activity.ImageActivity;
 import com.soar.cloud.base.BaseLazyFragment;
-import com.soar.cloud.bean.GankIoDataBean;
 import com.soar.cloud.constant.RouteConstants;
 import com.soar.cloud.databinding.FragmentWelfareBinding;
 import com.soar.cloud.utils.CommonUtils;
@@ -61,13 +61,10 @@ public class WelfareFragment extends BaseLazyFragment<FragmentWelfareBinding, We
         binding.recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, CommonUtils.takeEven(CommonUtils.dip2px(4))));
 
         viewModel.adapter.setItemClickListener(position -> {
-                    ArrayList<String> imageUrls = new ArrayList<>();
-                    for (GankIoDataBean.ResultBean data : viewModel.datas)
-                        imageUrls.add(data.url);
                     ARouter.getInstance()
                             .build(RouteConstants.Discover.WELFARE_IMG)
-                            .withInt(ImageActivity.POSITION,position)
-                            .withStringArrayList(ImageActivity.IMAGE_URLS, imageUrls)
+                            .withInt(ImageActivity.POSITION, position)
+                            .withStringArrayList(ImageActivity.IMAGE_URLS, (ArrayList<String>) Stream.of(viewModel.datas).map(data -> data.url).toList())
                             .navigation();
                 }
         );

@@ -1,15 +1,22 @@
 package com.soar.cloud.retrofit;
 
 
+import android.os.Build;
+
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+
+import javax.net.ssl.SSLSocketFactory;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -45,11 +52,29 @@ public class RetrofitClient {
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .baseUrl(urlMain)
+                    .client(getOkHttpClient())
                     .build();
             API api = retrofit.create(API.class);
             apis.put(urlMain, api);
         }
         return apis.get(urlMain);
+    }
+
+    /**
+     * 设置Android4.4及以下的系统支持HTTPS相关协议（v1.1和v1.2）
+     */
+    public static OkHttpClient getOkHttpClient() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        try {
+            SSLSocketFactory factory = new SSLSocketFactoryCompat();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH && Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH)
+                builder.sslSocketFactory(factory);
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return builder.build();
     }
 
     /**

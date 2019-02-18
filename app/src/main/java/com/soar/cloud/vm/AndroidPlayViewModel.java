@@ -5,6 +5,7 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
+import com.annimon.stream.Stream;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.soar.cloud.MyApplication;
@@ -43,7 +44,7 @@ public class AndroidPlayViewModel extends BaseViewModel {
     public AndroidPlayAdapter adapter;
     public HeaderFooterAdapter headerAdapter = new HeaderFooterAdapter(adapter = new AndroidPlayAdapter());
 
-    public ObservableField<List<Object>> bannerUrlDatas = new ObservableField<>();
+    public ObservableField<List<String>> bannerUrlDatas = new ObservableField<>();
     public ObservableField<List<String>> bannerTitleDatas = new ObservableField<>();
     public List<ArticlesBean> datas = new ArrayList<>();
 
@@ -73,12 +74,8 @@ public class AndroidPlayViewModel extends BaseViewModel {
 
             @Override
             public void onNext(List<AndroidPlayBannerBean> data) {
-                List<String> titles = new ArrayList<>();
-                List<Object> urls = new ArrayList<>();
-                for (AndroidPlayBannerBean datum : data) {
-                    titles.add(datum.title);
-                    urls.add(datum.imagePath);
-                }
+                List<String> titles = Stream.of(data).map(bean -> bean.title).toList();
+                List<String> urls = Stream.of(data).map(bean -> bean.imagePath).toList();
                 bannerTitleDatas.set(titles);
                 bannerUrlDatas.set(urls);
             }

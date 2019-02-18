@@ -56,7 +56,7 @@ public class BindAdapter {
     }
 
     @BindingAdapter(value = {"bannerData", "bannerTitle"}, requireAll = false)
-    public static void setBannerData(Banner view, List<Object> datas, List<String> titles) {
+    public static void setBannerData(Banner view, List<?> datas, List<String> titles) {
         if (titles != null)
             view.setBannerTitles(titles);
         if (datas != null && datas.size() > 0)

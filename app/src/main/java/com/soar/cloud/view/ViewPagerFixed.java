@@ -1,13 +1,14 @@
 package com.soar.cloud.view;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
  * 用于图片浏览ViewPage
  */
-public class ViewPagerFixed extends android.support.v4.view.ViewPager {
+public class ViewPagerFixed extends ViewPager {
 
     public ViewPagerFixed(Context context) {
         super(context);
