@@ -24,7 +24,7 @@ public class NetworkUtils {
             return info != null && info.isConnected();
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
+		            return false;
     }
 }

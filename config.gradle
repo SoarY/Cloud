@@ -5,8 +5,8 @@ ext {
             applicationId    : "com.soar.cloud",
             minSdkVersion    : 14,
             targetSdkVersion : 28,
-            versionCode      : 1,
-            versionName      : "1.0",
+            versionCode      : 10,
+            versionName      : "v1.0.0",
     ]
     //version配置
     versions = [
