@@ -65,8 +65,6 @@ dependencies {
     //ARouter
     implementation thirdLibs.arouter_api
     annotationProcessor thirdLibs.arouter_compiler
-    //下拉刷新控件
-    implementation thirdLibs.swipeToLoadLayout
     //banner轮播
     implementation thirdLibs.banner
     //Glide

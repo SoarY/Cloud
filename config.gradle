@@ -37,8 +37,6 @@ ext {
             //Arouter
             arouter_api           : "com.alibaba:arouter-api:1.4.1",
             arouter_compiler      : "com.alibaba:arouter-compiler:1.2.2",
-            //下拉刷新控件
-            swipeToLoadLayout     : "com.github.Aspsine:SwipeToLoadLayout:1.0.4",
             //banner轮播
             banner                : "com.youth.banner:banner:1.4.10",
             //Glide
