@@ -3,7 +3,7 @@
 [![Apache License 2.0][1]][2]
 [![API][3]][4]
 
-原项目为开源作者[youlookwhat][11]的[云阅][10],自己重构了框架以便学习。
+原项目为开源作者[youlookwhat][11]的[云阅][10],自己重构了框架。
 
 项目代码简洁明朗以MVVM+DataBinding框架为基础,整合Retrofit2、RxJava2、Rxlifecycle2、LiveData、Glide、ARouter、等流行模块,
 为项目基础框架而搭建。
