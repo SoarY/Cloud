@@ -3,7 +3,6 @@
 [![Apache License 2.0][1]][2]
 [![API][3]][4]
 
-原项目为开源作者[youlookwhat][11]的[云阅][10],自己重构了框架。
 
 项目代码简洁明朗以MVVM+DataBinding框架为基础,整合Retrofit2、RxJava2、Rxlifecycle2、LiveData、Glide、ARouter、等流行模块,
 为项目基础框架而搭建。
@@ -29,6 +28,3 @@ Apache 2.0. See the LICENSE file for details.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-14%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=14
-
-[10]:https://github.com/youlookwhat/CloudReader
-[11]:https://github.com/youlookwhat
